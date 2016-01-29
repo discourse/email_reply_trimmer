@@ -1,9 +1,9 @@
-require "email_reply_trimmer/empty_line_matcher"
-require "email_reply_trimmer/delimiter_matcher"
-require "email_reply_trimmer/signature_matcher"
-require "email_reply_trimmer/embedded_email_matcher"
-require "email_reply_trimmer/email_header_matcher"
-require "email_reply_trimmer/quote_matcher"
+require_relative "email_reply_trimmer/empty_line_matcher"
+require_relative "email_reply_trimmer/delimiter_matcher"
+require_relative "email_reply_trimmer/signature_matcher"
+require_relative "email_reply_trimmer/embedded_email_matcher"
+require_relative "email_reply_trimmer/email_header_matcher"
+require_relative "email_reply_trimmer/quote_matcher"
 
 class EmailReplyTrimmer
   VERSION = "0.0.1"

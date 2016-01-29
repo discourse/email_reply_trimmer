@@ -1,3 +1,5 @@
+require_relative "lib/email_reply_trimmer"
+
 Gem::Specification.new do |s|
   s.name = "email_reply_trimmer"
   s.version = EmailReplyTrimmer::VERSION
