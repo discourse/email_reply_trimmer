@@ -1,0 +1,19 @@
+This is a line before the embedded email.
+
+> Hello
+>
+> This is the embedded email.
+
+This is some text
+
+after the
+
+embedded email.
+
+>
+> This is another part of the embedded email.
+>
+>
+
+
+And here's my signature.
