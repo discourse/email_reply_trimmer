@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "email_reply_trimmer"
 
-class TestEmailReplyTrimmer < Minitest::Test
+class TestEmailReplyTrimmer < Minitest::Unit::TestCase
 
   EMAILS  = Dir["test/emails/*.txt"].map  { |path| File.basename(path) }
   REPLIES = Dir["test/replies/*.txt"].map { |path| File.basename(path) }

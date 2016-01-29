@@ -27,6 +27,8 @@ class EmailReplyTrimmer
   end
 
   def self.trim(text)
+    return "" if text.nil? || text =~ /\A[[:space:]]*\Z/m
+
     # normalize line endings
     text = text.gsub!(/\r*\n/, "\n")
 
