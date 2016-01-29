@@ -1,4 +1,4 @@
-# Discourse Email Reply Trimmer [![Build Status](https://api.travis-ci.org/discourse/email_reply_trimmer.svg?branch=master)](https://api.travis-ci.org/discourse/email_reply_trimmer)
+# Discourse Email Reply Trimmer [![Build Status](https://api.travis-ci.org/discourse/email_reply_trimmer.svg?branch=master)](https://travis-ci.org/discourse/email_reply_trimmer)
 
 EmailReplyTrimmer is a small library to trim replies from plain text email.
 
