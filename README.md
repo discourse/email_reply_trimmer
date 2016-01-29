@@ -10,7 +10,7 @@ To trim replies:
 
 ## Installation
 
-Get it from [GitHub](https://github.com/discourse/email_reply_trimmer.
+Get it from [GitHub](https://github.com/discourse/email_reply_trimmer).
 
 Run `rake` to run the tests.
 
