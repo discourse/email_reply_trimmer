@@ -30,7 +30,7 @@ class EmailReplyTrimmer
     return "" if text.nil? || text =~ /\A[[:space:]]*\Z/m
 
     # normalize line endings
-    text = text.gsub!(/\r*\n/, "\n")
+    text.gsub!(/\r*\n/, "\n")
 
     # fix embedded email markers that might span over multiple lines
     EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES.each do |r|

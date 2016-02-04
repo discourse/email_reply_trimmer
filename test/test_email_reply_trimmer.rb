@@ -22,7 +22,7 @@ class TestEmailReplyTrimmer < Minitest::Unit::TestCase
   end
 
   def trim(filename)
-    body = File.read("test/emails/#{filename}")
+    body = File.read("test/emails/#{filename}").strip
     EmailReplyTrimmer.trim(body)
   end
 
