@@ -10,6 +10,7 @@ class EmbeddedEmailMatcher
   # Dnia 14 lip 2015 o godz. 00:25 Michael Downey <info@discourse.org> napisał(a):
   # Em seg, 27 de jul de 2015 17:13, Neil Lalonde <info@discourse.org> escreveu:
   # El jueves, 21 de noviembre de 2013, codinghorror escribió:
+  # Am 03.02.2016 3:35 nachm. schrieb Max Mustermann <mail@example.com>:
   ON_DATE_SOMEONE_WROTE_MARKERS = [
     # Dutch
     ["Op","het volgende geschreven"],
@@ -23,6 +24,8 @@ class EmbeddedEmailMatcher
     ["Em", "escreveu"],
     # Spanish
     ["El", "escribió"],
+    # German
+    ["Am", "schrieb"],
   ]
 
   ON_DATE_SOMEONE_WROTE_REGEXES = ON_DATE_SOMEONE_WROTE_MARKERS.map do |on, wrote|
