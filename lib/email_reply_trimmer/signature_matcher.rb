@@ -12,7 +12,10 @@ class SignatureMatcher
   # <<sent by galaxy>>
   # (sent from a phone)
   # (Sent from mobile device)
+  # 從我的 iPhone 傳送
   SIGNATURE_REGEXES = [
+    # Chinese
+    /^[[:space:]]*從我的 iPhone 傳送/i,
     # English
     /^[[:space:]]*[[:word:]]+ from mobile/i,
     /^[[:space:]]*sent (?:from|via|with|by) .+/i,

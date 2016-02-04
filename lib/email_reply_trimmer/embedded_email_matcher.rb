@@ -86,11 +86,12 @@ class EmbeddedEmailMatcher
   # ----- Forwarded Message -----
   # ----- Original Message -----
   # -----Original Message-----
+  # *----- Original Message -----*
   FORWARDED_EMAIL_REGEXES = [
     # English
     /^[[:space:]]*Begin forwarded message:/i,
     /^[[:space:]]*Reply message/i,
-    /^[[:space:]]*-{2,}[[:space:]]*(Forwarded|Original) Message[[:space:]]*-{2,}/i
+    /^[[:space:]\*]*-{2,}[[:space:]]*(Forwarded|Original) Message[[:space:]]*-{2,}/i
   ]
 
   EMBEDDED_REGEXES = [
