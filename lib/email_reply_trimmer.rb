@@ -75,9 +75,9 @@ class EmailReplyTrimmer
     end
 
     # fix email headers when they span over multiple lines
-    if pattern =~ /hh[ht]+e/
-      index = pattern =~ /hh[ht]+e/
-      size = pattern[/hh[ht]+/].size
+    if pattern =~ /h+[hte]+h+e/
+      index = pattern =~ /h+[hte]+h+e/
+      size = pattern[/h+[hte]+h+e/].size
       size.times.each { |s| pattern[index + s] = EMAIL_HEADER }
     end
 
