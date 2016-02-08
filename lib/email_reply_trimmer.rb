@@ -51,18 +51,18 @@ class EmailReplyTrimmer
       lines.slice!(index)
     end
 
-    # if there is an embedded email marker, followed only by other email markers and/or text
+    # if there is an embedded email marker, not followed by a quote
     # then take everything up to that marker
-    if pattern =~ /te*b[etb]*$/
-      index = pattern =~ /te*b[etb]*$/
+    if pattern =~ /te*b[^q]*$/
+      index = pattern =~ /te*b[^q]*$/
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
 
     # if there is an embedded email marker, followed by a huge quote
     # then take everything up to that marker
-    if pattern =~ /te*b[eqb]*[te]*$/
-      index = pattern =~ /te*b[eqb]*[te]*$/
+    if pattern =~ /te*b[eqbh]*[te]*$/
+      index = pattern =~ /te*b[eqbh]*[te]*$/
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
