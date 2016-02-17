@@ -7,8 +7,12 @@ class EmailHeaderMatcher
     ["Sent"],
     # French
     ["Date"],
+    # German
+    ["Gesendet"],
     # Portuguese
     ["Enviada em"],
+    # Spanish
+    ["Enviado"],
     # Spanish (Mexican)
     ["Fecha"],
   ]
@@ -24,9 +28,11 @@ class EmailHeaderMatcher
     ["From", "To", "Cc", "Reply-To", "Subject"],
     # French
     ["De", "À", "Répondre à", "Objet"],
+    # German
+    ["Von", "An", "Betreff"],
     # Portuguese
     ["De", "Para", "Assunto"],
-    # Spanish (Mexican)
+    # Spanish
     ["De", "Para", "Asunto"],
   ]
 
