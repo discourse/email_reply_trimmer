@@ -25,7 +25,7 @@ class SignatureMatcher
     # French
     /^[[:space:]]*Envoyé depuis mon .+/i,
     # German
-    /^[[:space:]]*Von meinem Mobilgerät gesendet/i,
+    /^[[:space:]]*Von meinem .+ gesendet/i,
     /^[[:space:]]*Diese Nachricht wurde von .+ gesendet/i,
   ]
 
