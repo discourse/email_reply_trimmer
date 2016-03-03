@@ -26,7 +26,7 @@ class EmailReplyTrimmer
     return TEXT
   end
 
-  def self.trim(text)
+  def self.trim(text, split=false)
     return "" if text.nil? || text =~ /\A[[:space:]]*\Z/m
 
     # normalize line endings
@@ -37,6 +37,8 @@ class EmailReplyTrimmer
       next unless text =~ r
       text.gsub!($1, $1.gsub(/\n[[:space:]>\-]*/, " "))
     end
+
+    removed = []
 
     # from now on, we'll work on a line-by-line basis
     lines = text.split("\n")
@@ -55,6 +57,7 @@ class EmailReplyTrimmer
     # then take everything up to that marker
     if pattern =~ /te*b[^q]*$/
       index = pattern =~ /te*b[^q]*$/
+      removed = lines[(index + 1)..-1]
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
@@ -63,11 +66,12 @@ class EmailReplyTrimmer
     # then take everything up to that marker
     if pattern =~ /te*b[eqbh]*[te]*$/
       index = pattern =~ /te*b[eqbh]*[te]*$/
+      removed = lines[(index + 1)..-1]
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
 
-    # if there still are some embedded email markers, just empty them
+    # if there still are some embedded email markers, just remove them
     while pattern =~ /b/
       index = pattern =~ /b/
       pattern[index] = "e"
@@ -85,6 +89,7 @@ class EmailReplyTrimmer
     # these headers
     if pattern =~ /t[eq]*h{3,}/
       index = pattern =~ /t[eq]*h{3,}/
+      removed = lines[(index + 1)..-1]
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
@@ -103,8 +108,15 @@ class EmailReplyTrimmer
       lines = lines[0...index]
     end
 
-    # result
-    lines.join("\n").strip
+    # results
+    trimmed = lines.join("\n").strip
+    elided = removed.join("\n").strip
+
+    if split
+      [trimmed, elided]
+    else
+      trimmed
+    end
   end
 
 end
