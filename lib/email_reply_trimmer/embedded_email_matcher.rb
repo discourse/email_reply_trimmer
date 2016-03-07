@@ -18,6 +18,8 @@ class EmbeddedEmailMatcher
     ["On", "wrote"],
     # French
     ["Le", "a écrit "],
+    # Italian
+    ["Il", "ha scritto"],
     # Polish
     ["Dnia", "napisał\\(a\\)"],
     # Portuguese
