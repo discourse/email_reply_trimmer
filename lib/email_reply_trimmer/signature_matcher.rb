@@ -27,6 +27,8 @@ class SignatureMatcher
     # German
     /^[[:space:]]*Von meinem .+ gesendet/i,
     /^[[:space:]]*Diese Nachricht wurde von .+ gesendet/i,
+    # Spanish
+    /^[[:space:]]*Enviado desde mi .+/i,
   ]
 
   def self.match?(line)
