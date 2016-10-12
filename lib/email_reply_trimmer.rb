@@ -17,12 +17,12 @@ class EmailReplyTrimmer
   TEXT         = "t"
 
   def self.identify_line_content(line)
-    return EMPTY        if EmptyLineMatcher.match?(line)
-    return DELIMITER    if DelimiterMatcher.match?(line)
-    return SIGNATURE    if SignatureMatcher.match?(line)
-    return EMBEDDED     if EmbeddedEmailMatcher.match?(line)
-    return EMAIL_HEADER if EmailHeaderMatcher.match?(line)
-    return QUOTE        if QuoteMatcher.match?(line)
+    return EMPTY        if EmptyLineMatcher.match? line
+    return DELIMITER    if DelimiterMatcher.match? line
+    return SIGNATURE    if SignatureMatcher.match? line
+    return EMBEDDED     if EmbeddedEmailMatcher.match? line
+    return EMAIL_HEADER if EmailHeaderMatcher.match? line
+    return QUOTE        if QuoteMatcher.match? line
     return TEXT
   end
 
@@ -34,22 +34,26 @@ class EmailReplyTrimmer
 
     # fix embedded email markers that might span over multiple lines
     EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES.each do |r|
-      if text =~ r
-        text.gsub!(r) { |m| m.gsub(/\n[[:space:]>\-]*/, " ") }
-      end
+      text.gsub!(r) { |m| m.gsub(/\n[[:space:]>\-]*/, " ") }
     end
-
-    removed = []
 
     # from now on, we'll work on a line-by-line basis
     lines = text.split("\n")
+    lines_dup = lines.dup
 
     # identify content of each lines
     pattern = lines.map { |l| identify_line_content(l) }.join
 
-    # remove all signatures & delimiters
-    while pattern =~ /[ds]/
-      index = pattern =~ /[ds]/
+    # remove everything after the first delimiter
+    if pattern =~ /d/
+      index = pattern =~ /d/
+      pattern = pattern[0...index]
+      lines = lines[0...index]
+    end
+
+    # remove all mobile signatures
+    while pattern =~ /s/
+      index = pattern =~ /s/
       pattern.slice!(index)
       lines.slice!(index)
     end
@@ -58,7 +62,6 @@ class EmailReplyTrimmer
     # then take everything up to that marker
     if pattern =~ /te*b[^q]*$/
       index = pattern =~ /te*b[^q]*$/
-      removed = lines[(index + 1)..-1]
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
@@ -67,7 +70,6 @@ class EmailReplyTrimmer
     # then take everything up to that marker
     if pattern =~ /te*b[eqbh]*[te]*$/
       index = pattern =~ /te*b[eqbh]*[te]*$/
-      removed = lines[(index + 1)..-1]
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
@@ -75,8 +77,8 @@ class EmailReplyTrimmer
     # if there still are some embedded email markers, just remove them
     while pattern =~ /b/
       index = pattern =~ /b/
-      pattern[index] = "e"
-      lines[index] = ""
+      pattern.slice!(index)
+      lines.slice!(index)
     end
 
     # fix email headers when they span over multiple lines
@@ -90,7 +92,6 @@ class EmailReplyTrimmer
     # these headers
     if pattern =~ /t[eq]*h{3,}/
       index = pattern =~ /t[eq]*h{3,}/
-      removed = lines[(index + 1)..-1]
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
@@ -111,13 +112,32 @@ class EmailReplyTrimmer
 
     # results
     trimmed = lines.join("\n").strip
-    elided = removed.join("\n").strip
 
     if split
-      [trimmed, elided]
+      [trimmed, compute_elided(lines_dup, lines)]
     else
       trimmed
     end
   end
+
+  private
+
+    def self.compute_elided(text, lines)
+      elided = []
+
+      t = 0
+      l = 0
+
+      while t < text.size
+        while l < lines.size && text[t] == lines[l]
+          t += 1
+          l += 1
+        end
+        elided << text[t]
+        t += 1
+      end
+
+      elided.join("\n").strip
+    end
 
 end

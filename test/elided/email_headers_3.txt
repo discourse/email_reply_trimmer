@@ -8,6 +8,7 @@ Subject: VIS
         Here's an email with some very important stuff.
 
 
+________________________________
 Reply here<http://foo.bar> or hit reply from your inbox to help members by sharing your ideas.
 Mute this topic<http://42.wat> to stop getting updates, we'll send you the next one.
 

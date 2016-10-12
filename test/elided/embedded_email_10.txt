@@ -1,3 +1,8 @@
+Sent from Outlook Mobile<https://foo.bar>
+
+
+
+
 On Sun, Feb 7, 2016 at 12:12 AM -0800, "Arpit Jalan" <arpit.jalan@discourse.org<mailto:arpit.jalan@discourse.org>> wrote:
 
 Hi Some,
@@ -15,7 +20,9 @@ On Fri, 5 Feb 2016 at 10:42, Some One <foo@bar.com<mailto:foo@bar.com>> wrote:
 Arpit,
    Yes that sounds good.
 
+Sent from Outlook Mobile<https://foo.bar>
 
+_____________________________
 From: Arpit Jalan <arpit.jalan@discourse.org<mailto:arpit.jalan@discourse.org>>
 Sent: Thursday, February 4, 2016 10:05 AM
 Subject: Meta Discourse update

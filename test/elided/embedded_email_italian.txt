@@ -23,5 +23,6 @@
 > To unsubscribe from these emails, change your [user
 > preferences](https://meta.discourse.org/my/preferences)
 
+--
 Stefano Costa @stekosteko
 Editor, Journal of Open Archaeology Data
