@@ -15,6 +15,8 @@ class EmailHeaderMatcher
     ["Enviado"],
     # Spanish (Mexican)
     ["Fecha"],
+    # Italian
+    ["Data"],
   ]
 
   EMAIL_HEADERS_WITH_DATE_REGEXES = EMAIL_HEADERS_WITH_DATE_MARKERS.map do |header|
@@ -34,6 +36,8 @@ class EmailHeaderMatcher
     ["De", "Para", "Assunto"],
     # Spanish
     ["De", "Para", "Asunto"],
+    # Italian
+    ["Da", "Risposta", "A", "Oggetto"]
   ]
 
   EMAIL_HEADERS_WITH_TEXT_REGEXES = EMAIL_HEADERS_WITH_TEXT_MARKERS.map do |header|
