@@ -9,6 +9,9 @@ class TestEmailReplyTrimmer < Minitest::Test
 
   def test_all_emails_have_a_matching_reply
     assert_equal(EMAILS, TRIMMED, "Files in /emails and /trimmed folders should match 1-to-1.")
+  end
+
+  def test_all_emails_have_a_matching_elided
     assert_equal(EMAILS, ELIDED, "Files in /emails and /elided folders should match 1-to-1.")
   end
 
@@ -24,12 +27,31 @@ class TestEmailReplyTrimmer < Minitest::Test
     end
   end
 
+  EMBEDDED_EMAILS = %w{
+    email_headers_1 email_headers_2 email_headers_3 email_headers_4
+    embedded_email_10 embedded_email_german_3 embedded_email_spanish_2
+    forwarded_message
+  }
+
+  EMBEDDED_EMAILS.each do |name|
+    filename = "#{name}.txt"
+    define_method("test_embedded_extraction_for_#{name}") do
+      e, b = extract_embedded_email(filename)
+      assert_equal(e, embedded(filename), "[EMBEDDED] EMAIL: #{filename}")
+      assert_equal(b, before(filename), "[BEFORE] EMAIL: #{filename}")
+    end
+  end
+
   def trim(filename)
     EmailReplyTrimmer.trim(email(filename))
   end
 
   def elide(filename)
     EmailReplyTrimmer.trim(email(filename), true)[1]
+  end
+
+  def extract_embedded_email(filename)
+    EmailReplyTrimmer.extract_embedded_email(email(filename))
   end
 
   def email(filename)
@@ -42,6 +64,14 @@ class TestEmailReplyTrimmer < Minitest::Test
 
   def elided(filename)
     File.read("test/elided/#{filename}").strip
+  end
+
+  def embedded(filename)
+    File.read("test/embedded/#{filename}").strip
+  end
+
+  def before(filename)
+    File.read("test/before/#{filename}").strip
   end
 
 end

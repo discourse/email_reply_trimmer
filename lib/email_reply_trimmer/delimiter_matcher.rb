@@ -1,7 +1,7 @@
 class DelimiterMatcher
 
   DELIMITER_CHARACTERS ||= "-_,=+~#*ᐧ"
-  DELIMITER_REGEX      ||= /^[[:space:]]*[#{Regexp.escape(DELIMITER_CHARACTERS)}]+[[:space:]]*$/
+  DELIMITER_REGEX      ||= /^[[:blank:]>]*[#{Regexp.escape(DELIMITER_CHARACTERS)}]+[[:blank:]]*$/
 
   def self.match?(line)
     line =~ DELIMITER_REGEX

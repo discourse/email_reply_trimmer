@@ -1,7 +1,7 @@
 class QuoteMatcher
 
   def self.match?(line)
-    line =~ /^[[:space:]]*>/
+    line =~ /^[[:blank:]]*>/
   end
 
 end

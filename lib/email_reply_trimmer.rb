@@ -27,10 +27,10 @@ class EmailReplyTrimmer
   end
 
   def self.trim(text, split=false)
-    return "" if text.nil? || text =~ /\A[[:space:]]*\Z/m
+    return if text.nil? || text =~ /\A[[:space:]]*\Z/m
 
     # normalize line endings
-    text.gsub!(/\r*\n/, "\n")
+    text.gsub!("\r\n", "\n")
 
     # fix embedded email markers that might span over multiple lines
     EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES.each do |r|
@@ -117,6 +117,30 @@ class EmailReplyTrimmer
       [trimmed, compute_elided(lines_dup, lines)]
     else
       trimmed
+    end
+  end
+
+  def self.extract_embedded_email(text)
+    return if text.nil? || text =~ /\A[[:space:]]*\Z/m
+
+    # normalize line endings
+    text.gsub!("\r\n", "\n")
+
+    # fix embedded email markers that might span over multiple lines
+    EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES.each do |r|
+      text.gsub!(r) { |m| m.gsub(/\n[[:space:]>\-]*/, " ") }
+    end
+
+    # from now on, we'll work on a line-by-line basis
+    lines = text.split("\n")
+
+    # identify content of each lines
+    pattern = lines.map { |l| identify_line_content(l) }.join
+
+    if index = pattern =~ /(?:h[eqd]*?){3,}[tq]/
+      embedded = lines[index..-1].join("\n").strip
+      before = lines[0...(pattern[0...index] =~ /e*(b[eqd]*|b*[ed]*)$/)].join("\n").strip
+      return [embedded, before]
     end
   end
 

@@ -31,8 +31,8 @@ class EmbeddedEmailMatcher
   ]
 
   ON_DATE_SOMEONE_WROTE_REGEXES = ON_DATE_SOMEONE_WROTE_MARKERS.map do |on, wrote|
-    wrote.gsub!(" ", "[[:space:]]") # the "wrote" part might span over multiple lines
-    /^([ >\t\-]*#{on}\s(?:(?!#{on}\s|#{wrote}:?)[\s\S])*#{wrote}:?[ \t\-]*)$/m
+    wrote.gsub!(/ +/, "[[:space:]]+") # the "wrote" part might span over multiple lines
+    /^([[:blank:]>\-]*#{on}\s(?:(?!#{on}\s|#{wrote}:?)[\s\S])*#{wrote}:?[[:blank:]\-]*)$/m
   end
 
   # Op 10 dec. 2015 18:35 schreef "Arpit Jalan" <info@discourse.org>:
@@ -45,7 +45,7 @@ class EmbeddedEmailMatcher
   ]
 
   ON_DATE_WROTE_SOMEONE_REGEXES = ON_DATE_WROTE_SOMEONE_MARKERS.map do |on, wrote|
-    /^[[:space:]]*#{on}\s.+\s#{wrote}\s[^:]+:/
+    /^[[:blank:]>]*#{on}\s.+\s#{wrote}\s[^:]+:/
   end
 
   # суббота, 14 марта 2015 г. пользователь etewiah написал:
@@ -55,17 +55,17 @@ class EmbeddedEmailMatcher
   ]
 
   DATE_SOMEONE_WROTE_REGEXES = DATE_SOMEONE_WROTE_MARKERS.map do |user, wrote|
-    /[[:space:]]*.+#{user}.+#{wrote}:/
+    /.+#{user}.+#{wrote}:/
   end
 
   # 2016-03-03 17:21 GMT+01:00 Some One
-  ISO_DATE_SOMEONE_REGEX = /^[[:space:]]*20\d\d-\d\d-\d\d \d\d:\d\d GMT\+\d\d:\d\d [\w[:space:]]+$/
+  ISO_DATE_SOMEONE_REGEX = /^[[:blank:]>]*20\d\d-\d\d-\d\d \d\d:\d\d GMT\+\d\d:\d\d [\w[:blank:]]+$/
 
   # 2015-10-18 0:17 GMT+03:00 Matt Palmer <info@discourse.org>:
   # 2013/10/2 camilohollanda <info@discourse.org>
   # вт, 5 янв. 2016 г. в 23:39, Erlend Sogge Heggen <info@discourse.org>:
   # ср, 1 апр. 2015, 18:29, Denis Didkovsky <info@discourse.org>:
-  DATE_SOMEONE_EMAIL_REGEX = /^[[:space:]]*.*\d{4}.+<[^@<>]+@[^@<>.]+\.[^@<>]+>:?$/
+  DATE_SOMEONE_EMAIL_REGEX = /^[[:blank:]>]*.*\d{4}.+<[^@<>]+@[^@<>.]+\.[^@<>]+>:?$/
 
   # codinghorror via Discourse Meta wrote:
   # codinghorror via Discourse Meta <info@discourse.org> schrieb:
@@ -77,14 +77,14 @@ class EmbeddedEmailMatcher
   ]
 
   SOMEONE_VIA_SOMETHING_WROTE_REGEXES = SOMEONE_VIA_SOMETHING_WROTE_MARKERS.map do |wrote|
-    /^[[:space:]]*.+ via .+ #{wrote}:?[[:space:]]*$/
+    /^[[:blank:]>]*.+ via .+ #{wrote}:?[[:blank:]]*$/
   end
 
   # Some One <info@discourse.org> wrote:
-  SOMEONE_EMAIL_WROTE_REGEX = /^[[:space:]]*.+ <.+@.+\..+> wrote:?/
+  SOMEONE_EMAIL_WROTE_REGEX = /^[[:blank:]>]*.+ <.+@.+\..+> wrote:?/
 
   # Posted by mpalmer on 01/21/2016
-  POSTED_BY_SOMEONE_ON_DATE_REGEX = /^[[:space:]]*Posted by .+ on \d{2}\/\d{2}\/\d{4}$/i
+  POSTED_BY_SOMEONE_ON_DATE_REGEX = /^[[:blank:]>]*Posted by .+ on \d{2}\/\d{2}\/\d{4}$/i
 
   # Begin forwarded message:
   # Reply Message
@@ -94,13 +94,15 @@ class EmbeddedEmailMatcher
   # *----- Original Message -----*
   FORWARDED_EMAIL_REGEXES = [
     # English
-    /^[[:space:]]*Begin forwarded message:/i,
-    /^[[:space:]]*Reply message/i,
-    /^[[:space:]\*]*-{2,}[[:space:]]*(Forwarded|Original) Message[[:space:]]*-{2,}/i,
+    /^[[:blank:]>]*Begin forwarded message:/i,
+    /^[[:blank:]>]*Reply message/i,
+    /^[[:blank:]>\*]*-{2,}[[:blank:]]*(Forwarded|Original) Message[[:blank:]]*-{2,}/i,
+    # French
+    /^[[:blank:]>\*]*-{2,}[[:blank:]]*Message transféré[[:blank:]]*-{2,}/i,
     # German
-    /^[[:space:]\*]*-{2,}[[:space:]]*Ursprüngliche Nachricht[[:space:]]*-{2,}/i,
+    /^[[:blank:]>\*]*-{2,}[[:blank:]]*Ursprüngliche Nachricht[[:blank:]]*-{2,}/i,
     # Spanish
-    /^[[:space:]\*]*-{2,}[[:space:]]*Mensaje original[[:space:]]*-{2,}/i,
+    /^[[:blank:]>\*]*-{2,}[[:blank:]]*Mensaje original[[:blank:]]*-{2,}/i,
   ]
 
   EMBEDDED_REGEXES = [

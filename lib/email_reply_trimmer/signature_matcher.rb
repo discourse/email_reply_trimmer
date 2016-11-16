@@ -15,20 +15,18 @@ class SignatureMatcher
   # 從我的 iPhone 傳送
   SIGNATURE_REGEXES = [
     # Chinese
-    /^[[:space:]]*從我的 iPhone 傳送/i,
+    /^[[:blank:]>]*從我的 iPhone 傳送/i,
     # English
-    /^[[:space:]]*[[:word:]]+ from mobile/i,
-    /^[[:space:]]*sent (?:from|via|with|by) .+/i,
-    /^[[:space:]]*\(sent (?:from|via|with|by) .+\)/i,
-    /^[[:space:]]*<<sent (?:from|via|with|by) .+>>/i,
-    /^[[:space:]]*from my .{1,20}/i, # don't match too much
+    /^[[:blank:]>]*[[:word:]]+ from mobile/i,
+    /^[[:blank:]>]*[\(<]*sent (?:from|via|with|by) .+[\)>]*/i,
+    /^[[:blank:]>]*from my .{1,20}/i, # don't match too much
     # French
-    /^[[:space:]]*Envoyé depuis mon .+/i,
+    /^[[:blank:]>]*Envoyé depuis mon .+/i,
     # German
-    /^[[:space:]]*Von meinem .+ gesendet/i,
-    /^[[:space:]]*Diese Nachricht wurde von .+ gesendet/i,
+    /^[[:blank:]>]*Von meinem .+ gesendet/i,
+    /^[[:blank:]>]*Diese Nachricht wurde von .+ gesendet/i,
     # Spanish
-    /^[[:space:]]*Enviado desde mi .+/i,
+    /^[[:blank:]>]*Enviado desde mi .+/i,
   ]
 
   def self.match?(line)
