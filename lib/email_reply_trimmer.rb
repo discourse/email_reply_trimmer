@@ -58,6 +58,13 @@ class EmailReplyTrimmer
       lines.slice!(index)
     end
 
+    # when the reply is at the end of the email
+    if pattern =~ /^b+q+[eq]*t[te]*$/
+      index = pattern =~ /t/
+      pattern = ""
+      lines = lines[index..-1]
+    end
+
     # if there is an embedded email marker, not followed by a quote
     # then take everything up to that marker
     if pattern =~ /te*b[^q]*$/
