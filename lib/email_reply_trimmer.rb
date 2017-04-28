@@ -33,7 +33,9 @@ class EmailReplyTrimmer
     text.gsub!("\r\n", "\n")
 
     # fix embedded email markers that might span over multiple lines
-    EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES.each do |r|
+    (EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES +
+      EmbeddedEmailMatcher::SOMEONE_WROTE_ON_DATE_REGEXES
+    ).each do |r|
       text.gsub!(r) { |m| m.gsub(/\n[[:space:]>\-]*/, " ") }
     end
 

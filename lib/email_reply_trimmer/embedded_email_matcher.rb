@@ -58,6 +58,19 @@ class EmbeddedEmailMatcher
     /.+#{user}.+#{wrote}:/
   end
 
+  # Max Mustermann <try_discourse@discoursemail.com> schrieb am Fr., 28. Apr. 2017 um 11:53 Uhr:
+  SOMEONE_WROTE_ON_DATE_MARKERS = [
+    # English
+    "wrote on",
+    # German
+    "schrieb am",
+  ]
+
+  SOMEONE_WROTE_ON_DATE_REGEXES = SOMEONE_WROTE_ON_DATE_MARKERS.map do |wrote_on|
+    wrote_on.gsub!(/ +/, "[[:space:]]+") # the "wrote" part might span over multiple lines
+    /^.+#{wrote_on}.+[^:]+:/
+  end
+
   # 2016-03-03 17:21 GMT+01:00 Some One
   ISO_DATE_SOMEONE_REGEX = /^[[:blank:]>]*20\d\d-\d\d-\d\d \d\d:\d\d GMT\+\d\d:\d\d [\w[:blank:]]+$/
 
@@ -110,6 +123,7 @@ class EmbeddedEmailMatcher
     ON_DATE_WROTE_SOMEONE_REGEXES,
     DATE_SOMEONE_WROTE_REGEXES,
     DATE_SOMEONE_EMAIL_REGEX,
+    SOMEONE_WROTE_ON_DATE_REGEXES,
     ISO_DATE_SOMEONE_REGEX,
     SOMEONE_VIA_SOMETHING_WROTE_REGEXES,
     SOMEONE_EMAIL_WROTE_REGEX,
