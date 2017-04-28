@@ -22,8 +22,8 @@ class TestEmailReplyTrimmer < Minitest::Test
   EMAILS.each do |filename|
     name = File.basename(filename, ".txt")
     define_method("test_#{name}") do
-      assert_equal(trim(filename), trimmed(filename), "[TRIMMED] EMAIL: #{filename}")
-      assert_equal(elide(filename), elided(filename), "[ELIDED] EMAIL: #{filename}")
+      assert_equal(trimmed(filename), trim(filename), "[TRIMMED] EMAIL: #{filename}")
+      assert_equal(elided(filename), elide(filename), "[ELIDED] EMAIL: #{filename}")
     end
   end
 
