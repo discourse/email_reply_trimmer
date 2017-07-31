@@ -13,20 +13,27 @@ class SignatureMatcher
   # (sent from a phone)
   # (Sent from mobile device)
   # 從我的 iPhone 傳送
-  SIGNATURE_REGEXES = [
+  SIGNATURE_REGEXES ||= [
     # Chinese
-    /^[[:blank:]>]*從我的 iPhone 傳送/i,
+    /^[[:blank:]]*從我的 iPhone 傳送/i,
     # English
-    /^[[:blank:]>]*[[:word:]]+ from mobile/i,
-    /^[[:blank:]>]*[\(<]*sent (?:from|via|with|by) .+[\)>]*/i,
-    /^[[:blank:]>]*from my .{1,20}/i, # don't match too much
+    /^[[:blank:]]*[[:word:]]+ from mobile/i,
+    /^[[:blank:]]*[\(<]*Sent (from|via|with|by) .+[\)>]*/i,
+    /^[[:blank:]]*From my .{1,20}/i,
+    /^[[:blank:]]*Get Outlook for iOS/i,
     # French
-    /^[[:blank:]>]*Envoyé depuis mon .+/i,
+    /^[[:blank:]]*Envoyé depuis (mon|Yahoo Mail)/i,
     # German
-    /^[[:blank:]>]*Von meinem .+ gesendet/i,
-    /^[[:blank:]>]*Diese Nachricht wurde von .+ gesendet/i,
+    /^[[:blank:]]*Von meinem .+ gesendet/i,
+    /^[[:blank:]]*Diese Nachricht wurde von .+ gesendet/i,
+    # Italian
+    /^[[:blank:]]*Inviato da /i,
+    # Norwegian
+    /^[[:blank:]]*Sendt fra min /i,
+    # Portuguese
+    /^[[:blank:]]*Enviado do meu /i,
     # Spanish
-    /^[[:blank:]>]*Enviado desde mi .+/i,
+    /^[[:blank:]]*Enviado desde mi /i,
   ]
 
   def self.match?(line)

@@ -10,10 +10,10 @@ after the
 
 embedded email.
 
->
-> This is another part of the embedded email.
->
->
+C>
+C> This is another part of the embedded email.
+C>
+C>
 
 
 _______________________

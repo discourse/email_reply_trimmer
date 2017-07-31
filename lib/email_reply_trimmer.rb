@@ -27,17 +27,10 @@ class EmailReplyTrimmer
   end
 
   def self.trim(text, split=false)
-    return if text.nil? || text =~ /\A[[:space:]]*\Z/m
+    return if text.nil? || text =~ /\A[[:space:]]*\z/m
 
-    # normalize line endings
-    text.gsub!("\r\n", "\n")
-
-    # fix embedded email markers that might span over multiple lines
-    (EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES +
-      EmbeddedEmailMatcher::SOMEONE_WROTE_ON_DATE_REGEXES
-    ).each do |r|
-      text.gsub!(r) { |m| m.gsub(/\n[[:space:]>\-]*/, " ") }
-    end
+    # do some cleanup
+    preprocess!(text)
 
     # from now on, we'll work on a line-by-line basis
     lines = text.split("\n")
@@ -61,8 +54,8 @@ class EmailReplyTrimmer
     end
 
     # when the reply is at the end of the email
-    if pattern =~ /^b+q+[eq]*t[te]*$/
-      index = pattern =~ /t/
+    if pattern =~ /^(b[^t]+)*b[bqeh]+t[et]*$/
+      index = pattern =~ /t[et]*$/
       pattern = ""
       lines = lines[index..-1]
     end
@@ -77,8 +70,16 @@ class EmailReplyTrimmer
 
     # if there is an embedded email marker, followed by a huge quote
     # then take everything up to that marker
-    if pattern =~ /te*b[eqbh]*[te]*$/
+    if pattern =~ /te*b[eqbh]*([te]*)$/ && $1.count("t") < 7
       index = pattern =~ /te*b[eqbh]*[te]*$/
+      pattern = pattern[0..index]
+      lines = lines[0..index]
+    end
+
+    # if there is some text before a huge quote ending the email,
+    # then remove the quote
+    if pattern =~ /te*[qbe]+$/
+      index = pattern =~ /te*[qbe]+$/
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
@@ -97,8 +98,8 @@ class EmailReplyTrimmer
       size.times.each { |s| pattern[index + s] = EMAIL_HEADER }
     end
 
-    # if there are at least 3 consecutive email headers, take everything up to
-    # these headers
+    # if there are at least 3 consecutive email headers,
+    # take everything up to these headers
     if pattern =~ /t[eq]*h{3,}/
       index = pattern =~ /t[eq]*h{3,}/
       pattern = pattern[0..index]
@@ -130,15 +131,10 @@ class EmailReplyTrimmer
   end
 
   def self.extract_embedded_email(text)
-    return if text.nil? || text =~ /\A[[:space:]]*\Z/m
+    return if text.nil? || text =~ /\A[[:space:]]*\z/m
 
-    # normalize line endings
-    text.gsub!("\r\n", "\n")
-
-    # fix embedded email markers that might span over multiple lines
-    EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES.each do |r|
-      text.gsub!(r) { |m| m.gsub(/\n[[:space:]>\-]*/, " ") }
-    end
+    # do some cleanup
+    preprocess!(text)
 
     # from now on, we'll work on a line-by-line basis
     lines = text.split("\n")
@@ -154,6 +150,43 @@ class EmailReplyTrimmer
   end
 
   private
+
+    def self.preprocess!(text)
+      # normalize line endings
+      text.gsub!("\r\n", "\n")
+
+      # remove PGP markers
+      text.gsub!(/\A-----BEGIN PGP SIGNED MESSAGE-----\n(?:Hash: \w+)?\s+/i, "")
+      text.gsub!(/^-----BEGIN PGP SIGNATURE-----$[\s\S]+^-----END PGP SIGNATURE-----/, "")
+
+      # remove unsubscribe links
+      text.gsub!(/^Unsubscribe: .+@.+(\n.+http:.+)?\s*\z/i, "")
+
+      # remove alias-style quotes marker
+      text.gsub!(/^.*>{5} "[^"\n]+" == .+ writes:/, "")
+
+      # change enclosed-style quotes format
+      text.gsub!(/^>>> ?(.+) ?>>>$\n([\s\S]+?)\n^<<< ?\1 ?<<<$/) { $2.gsub(/^/, "> ") }
+      text.gsub!(/^>{4,}[[:blank:]]*$\n([\s\S]+?)\n^<{4,}[[:blank:]]*$/) { $1.gsub(/^/, "> ") }
+
+      # fix all quotes formats
+      text.gsub!(/^((?:[[:blank:]]*[[:alpha:]]*[>|])+)/) { $1.gsub(/([[:alpha:]]+>|\|)/, ">") }
+
+      # fix embedded email markers that might span over multiple lines
+      (
+        EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES +
+        EmbeddedEmailMatcher::SOMEONE_WROTE_ON_DATE_REGEXES +
+        EmbeddedEmailMatcher::DATE_SOMEONE_WROTE_REGEXES +
+        [EmbeddedEmailMatcher::DATE_SOMEONE_EMAIL_REGEX]
+      ).each do |r|
+        text.gsub!(r) do |m|
+          m.count("\n") > 4 ? m : m.gsub(/\n+[[:space:]]*/, " ")
+        end
+      end
+
+      # remove leading/trailing whitespaces
+      text.strip!
+    end
 
     def self.compute_elided(text, lines)
       elided = []
