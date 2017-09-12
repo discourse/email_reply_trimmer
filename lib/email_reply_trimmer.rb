@@ -26,7 +26,7 @@ class EmailReplyTrimmer
     return TEXT
   end
 
-  def self.trim(text, split=false)
+  def self.trim(text, split = false)
     return if text.nil? || text =~ /\A[[:space:]]*\z/m
 
     # do some cleanup

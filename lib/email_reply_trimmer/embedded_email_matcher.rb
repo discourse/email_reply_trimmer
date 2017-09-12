@@ -80,7 +80,6 @@ class EmbeddedEmailMatcher
   # 2016-03-03 17:21 GMT+01:00 Some One
   ISO_DATE_SOMEONE_REGEX = /^[[:blank:]>]*20\d\d-\d\d-\d\d \d\d:\d\d GMT\+\d\d:\d\d [\w[:blank:]]+$/
 
-
   # 2015-10-18 0:17 GMT+03:00 Matt Palmer <info@discourse.org>:
   # 2013/10/2 camilohollanda <info@discourse.org>
   # вт, 5 янв. 2016 г. в 23:39, Erlend Sogge Heggen <info@discourse.org>:
