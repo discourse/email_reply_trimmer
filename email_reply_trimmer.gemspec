@@ -15,6 +15,10 @@ Gem::Specification.new do |s|
   s.license = "MIT"
 
   s.require_paths = ["lib"]
-  s.files = Dir["**/*"].reject { |path| File.directory?(path) }
+  s.files = Dir["**/*"].reject { |path| File.directory?(path) || path =~ /.*\.gem$/ }
   s.test_files = s.files.select { |path| path =~ /^test\/.+_test\.rb$/ }
+
+  s.add_development_dependency 'rake', '~> 12'
+  s.add_development_dependency 'minitest', '~> 5'
+  s.add_development_dependency 'rubocop', '~> 0'
 end
