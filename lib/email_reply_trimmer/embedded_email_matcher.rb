@@ -13,25 +13,25 @@ class EmbeddedEmailMatcher
   # At 6/16/2016 08:32 PM, you wrote:
   ON_DATE_SOMEONE_WROTE_REGEXES ||= [
     # Chinese
-    /^[[:blank:]<>-]*在 ((?!\b(在|写道)\b)[\s\S])+?写道[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*在 (?:(?!\b(?>在|写道)\b).)+?写道[[:blank:].:>-]*$/im,
     # Dutch
-    /^[[:blank:]<>-]*Op ((?!\b(Op|het\svolgende\sgeschreven|schreef)\b)[\s\S])+?(het\svolgende\sgeschreven|schreef[^:]+)[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*Op (?:(?!\b(?>Op|het\svolgende\sgeschreven|schreef)\b).)+?(het\svolgende\sgeschreven|schreef[^:]+)[[:blank:].:>-]*$/im,
     # English
-    /^[[:blank:]<>-]*In message ((?!\b(In message|writes)\b)[\s\S])+?writes[[:blank:].:>-]*$/i,
-    /^[[:blank:]<>-]*(On|At) ((?!\b(On|wrote|writes|says|said)\b)[\s\S])+?(wrote|writes|says|said)[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*In message (?:(?!\b(?>In message|writes)\b).)+?writes[[:blank:].:>-]*$/im,
+    /^[[:blank:]<>-]*(On|At) (?:(?!\b(?>On|wrote|writes|says|said)\b).)+?(wrote|writes|says|said)[[:blank:].:>-]*$/im,
     # French
-    /^[[:blank:]<>-]*Le ((?!\b(Le|nous\sa\sdit|a\s+écrit)\b)[\s\S])+?(nous\sa\sdit|a\s+écrit)[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*Le (?:(?!\b(?>Le|nous\sa\sdit|a\s+écrit)\b).)+?(nous\sa\sdit|a\s+écrit)[[:blank:].:>-]*$/im,
     # German
-    /^[[:blank:]<>-]*Am ((?!\b(Am|schrieben\sSie)\b)[\s\S])+?schrieben\sSie[[:blank:].:>-]*$/i,
-    /^[[:blank:]<>-]*Am ((?!\b(Am|geschrieben)\b)[\s\S])+?(geschrieben|schrieb[^:]+)[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*Am (?:(?!\b(?>Am|schrieben\sSie)\b).)+?schrieben\sSie[[:blank:].:>-]*$/im,
+    /^[[:blank:]<>-]*Am (?:(?!\b(?>Am|geschrieben)\b).)+?(geschrieben|schrieb[^:]+)[[:blank:].:>-]*$/im,
     # Italian
-    /^[[:blank:]<>-]*Il ((?!\b(Il|ha\sscritto)\b)[\s\S])+?ha\sscritto[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*Il (?:(?!\b(?>Il|ha\sscritto)\b).)+?ha\sscritto[[:blank:].:>-]*$/im,
     # Polish
-    /^[[:blank:]<>-]*(Dnia|Dňa) ((?!\b(Dnia|Dňa|napisał)\b)[\s\S])+?napisał(\(a\))?[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*(Dnia|Dňa) (?:(?!\b(?>Dnia|Dňa|napisał)\b).)+?napisał(\(a\))?[[:blank:].:>-]*$/im,
     # Portuguese
-    /^[[:blank:]<>-]*Em ((?!\b(Em|escreveu)\b)[\s\S])+?escreveu[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*Em (?:(?!\b(?>Em|escreveu)\b).)+?escreveu[[:blank:].:>-]*$/im,
     # Spanish
-    /^[[:blank:]<>-]*El ((?!\b(El|escribió)\b)[\s\S])+?escribió[[:blank:].:>-]*$/i,
+    /^[[:blank:]<>-]*El (?:(?!\b(?>El|escribió)\b).)+?escribió[[:blank:].:>-]*$/im,
   ]
 
   # Op 10 dec. 2015 18:35 schreef "Arpit Jalan" <info@discourse.org>:
