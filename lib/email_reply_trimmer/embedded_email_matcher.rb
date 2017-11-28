@@ -54,6 +54,8 @@ class EmbeddedEmailMatcher
   end
 
   # суббота, 14 марта 2015 г. пользователь etewiah написал:
+  # 23 mar 2017 21:25 "Neil Lalonde" <meta@discoursemail.com> napisał(a):
+  # 30 серп. 2016 р. 20:45 "Arpit" no-reply@example.com пише:
   DATE_SOMEONE_WROTE_MARKERS = [
     # Russian
     ["пользователь", "написал"],
@@ -65,7 +67,7 @@ class EmbeddedEmailMatcher
 
   DATE_SOMEONE_WROTE_REGEXES = DATE_SOMEONE_WROTE_MARKERS.map do |user, wrote|
     user.size == 0 ?
-      /^.*\d{4}.*?(?:(?!#{wrote})[\s\S])*#{wrote}:/ :
+      /^.*\d{4}.+\s?[^@<>]+@[^@<>.]+\.[^@<>]+(?:[\s\S]{2})#{wrote}:/ :
       /^.*\d{4}.*?#{user}.*?(?:(?!#{wrote})[\s\S])*#{wrote}:/
   end
 
