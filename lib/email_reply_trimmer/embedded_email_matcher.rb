@@ -67,8 +67,8 @@ class EmbeddedEmailMatcher
 
   DATE_SOMEONE_WROTE_REGEXES = DATE_SOMEONE_WROTE_MARKERS.map do |user, wrote|
     user.size == 0 ?
-      /^.*\d{4}.+\s?[^@<>]+@[^@<>.]+\.[^@<>]+(?:[\s\S]{2})#{wrote}:/ :
-      /^.*\d{4}.*?#{user}.*?(?:(?!#{wrote})[\s\S])*#{wrote}:/
+      /^.*\d{4}.+\n?.*#{wrote}:/ :
+      /^.*\d{4}.+#{user}.*\n?.*#{wrote}:/
   end
 
   # Max Mustermann <try_discourse@discoursemail.com> schrieb am Fr., 28. Apr. 2017 um 11:53 Uhr:
