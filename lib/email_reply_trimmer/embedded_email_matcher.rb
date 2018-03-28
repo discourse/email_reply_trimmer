@@ -67,8 +67,8 @@ class EmbeddedEmailMatcher
 
   DATE_SOMEONE_WROTE_REGEXES = DATE_SOMEONE_WROTE_MARKERS.map do |user, wrote|
     user.size == 0 ?
-      /^.*\d{4}.+\n?.*#{wrote}:/ :
-      /^.*\d{4}.+#{user}.*\n?.*#{wrote}:/
+      /\d{4}.{1,80}\n?.{0,80}?#{wrote}:/ :
+      /\d{4}.{1,80}#{user}.{0,80}\n?.{0,80}?#{wrote}:/
   end
 
   # Max Mustermann <try_discourse@discoursemail.com> schrieb am Fr., 28. Apr. 2017 um 11:53 Uhr:
@@ -86,7 +86,7 @@ class EmbeddedEmailMatcher
   # 2013/10/2 camilohollanda <info@discourse.org>
   # вт, 5 янв. 2016 г. в 23:39, Erlend Sogge Heggen <info@discourse.org>:
   # ср, 1 апр. 2015, 18:29, Denis Didkovsky <info@discourse.org>:
-  DATE_SOMEONE_EMAIL_REGEX = /^.*\d{4}.+\s?<[^@<>]+@[^@<>.]+\.[^@<>]+>:?$/
+  DATE_SOMEONE_EMAIL_REGEX = /\d{4}.{1,80}\s?<[^@<>]+@[^@<>.]+\.[^@<>]+>:?$/
 
   # codinghorror via Discourse Meta wrote:
   # codinghorror via Discourse Meta <info@discourse.org> schrieb:
