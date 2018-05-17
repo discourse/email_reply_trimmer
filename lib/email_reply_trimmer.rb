@@ -6,7 +6,7 @@ require_relative "email_reply_trimmer/email_header_matcher"
 require_relative "email_reply_trimmer/quote_matcher"
 
 class EmailReplyTrimmer
-  VERSION = "0.1.11"
+  VERSION = "0.1.12"
 
   DELIMITER    = "d"
   EMBEDDED     = "b"
