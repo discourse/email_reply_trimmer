@@ -20,7 +20,7 @@ class SignatureMatcher
     /^[[:blank:]]*[[:word:]]+ from mobile/i,
     /^[[:blank:]]*[\(<]*Sent (from|via|with|by) .+[\)>]*/i,
     /^[[:blank:]]*From my .{1,20}/i,
-    /^[[:blank:]]*Get Outlook for iOS/i,
+    /^[[:blank:]]*Get Outlook for /i,
     # French
     /^[[:blank:]]*Envoyé depuis (mon|Yahoo Mail)/i,
     # German
@@ -34,10 +34,17 @@ class SignatureMatcher
     /^[[:blank:]]*Enviado do meu /i,
     # Spanish
     /^[[:blank:]]*Enviado desde mi /i,
+    # Dutch
+    /^[[:blank:]]*Verzonden met /i,
+    /^[[:blank:]]*Verstuurd vanaf mijn /i,
+    # Swedish
+    /^[[:blank:]]*från min /i,
   ]
 
   def self.match?(line)
-    SIGNATURE_REGEXES.any? { |r| line =~ r }
+    # remove any markdown links
+    stripped = line.gsub(/\[([^\]]+)\]\([^\)]+\)/) { $1 }
+    SIGNATURE_REGEXES.any? { |r| stripped =~ r }
   end
 
 end

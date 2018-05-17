@@ -26,5 +26,8 @@ Sent from my Windows 8 PC <http://windows.microsoft.com/consumer-preview>
 (sent from a phone)
 (Sent from mobile device)
 從我的 iPhone 傳送
+Sent from [mail](https://go.microsoft.com/fwlink/?LinkId=550986) for windows 10
+Verzonden met BlackBerry Work
 
 Get Outlook for iOShttps://aka.ms/o0ukef
+Get [Outlook for Android](https://aka.ms/ghei36)
