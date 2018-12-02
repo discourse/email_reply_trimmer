@@ -1,3 +1,5 @@
 .DS_Store
 *.gem
 /Gemfile.lock
+
+.rubocop-https---raw-githubusercontent-com-discourse-discourse-master--rubocop-yml
