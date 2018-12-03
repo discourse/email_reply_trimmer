@@ -151,59 +151,59 @@ class EmailReplyTrimmer
 
   private
 
-    def self.preprocess!(text)
-      # normalize line endings
-      text.gsub!("\r\n", "\n")
+  def self.preprocess!(text)
+    # normalize line endings
+    text.gsub!("\r\n", "\n")
 
-      # remove PGP markers
-      text.gsub!(/\A-----BEGIN PGP SIGNED MESSAGE-----\n(?:Hash: \w+)?\s+/i, "")
-      text.gsub!(/^-----BEGIN PGP SIGNATURE-----$[\s\S]+^-----END PGP SIGNATURE-----/, "")
+    # remove PGP markers
+    text.gsub!(/\A-----BEGIN PGP SIGNED MESSAGE-----\n(?:Hash: \w+)?\s+/i, "")
+    text.gsub!(/^-----BEGIN PGP SIGNATURE-----$[\s\S]+^-----END PGP SIGNATURE-----/, "")
 
-      # remove unsubscribe links
-      text.gsub!(/^Unsubscribe: .+@.+(\n.+http:.+)?\s*\z/i, "")
+    # remove unsubscribe links
+    text.gsub!(/^Unsubscribe: .+@.+(\n.+http:.+)?\s*\z/i, "")
 
-      # remove alias-style quotes marker
-      text.gsub!(/^.*>{5} "[^"\n]+" == .+ writes:/, "")
+    # remove alias-style quotes marker
+    text.gsub!(/^.*>{5} "[^"\n]+" == .+ writes:/, "")
 
-      # change enclosed-style quotes format
-      text.gsub!(/^>>> ?(.+) ?>>>$\n([\s\S]+?)\n^<<< ?\1 ?<<<$/) { $2.gsub(/^/, "> ") }
-      text.gsub!(/^>{4,}[[:blank:]]*$\n([\s\S]+?)\n^<{4,}[[:blank:]]*$/) { $1.gsub(/^/, "> ") }
+    # change enclosed-style quotes format
+    text.gsub!(/^>>> ?(.+) ?>>>$\n([\s\S]+?)\n^<<< ?\1 ?<<<$/) { $2.gsub(/^/, "> ") }
+    text.gsub!(/^>{4,}[[:blank:]]*$\n([\s\S]+?)\n^<{4,}[[:blank:]]*$/) { $1.gsub(/^/, "> ") }
 
-      # fix all quotes formats
-      text.gsub!(/^((?:[[:blank:]]*[[:alpha:]]*[>|])+)/) { $1.gsub(/([[:alpha:]]+>|\|)/, ">") }
+    # fix all quotes formats
+    text.gsub!(/^((?:[[:blank:]]*[[:alpha:]]*[>|])+)/) { $1.gsub(/([[:alpha:]]+>|\|)/, ">") }
 
-      # fix embedded email markers that might span over multiple lines
-      (
-        EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES +
-        EmbeddedEmailMatcher::SOMEONE_WROTE_ON_DATE_REGEXES +
-        EmbeddedEmailMatcher::DATE_SOMEONE_WROTE_REGEXES +
-        [EmbeddedEmailMatcher::DATE_SOMEONE_EMAIL_REGEX]
-      ).each do |r|
-        text.gsub!(r) do |m|
-          m.count("\n") > 4 ? m : m.gsub(/\n+[[:space:]]*/, " ")
-        end
+    # fix embedded email markers that might span over multiple lines
+    (
+      EmbeddedEmailMatcher::ON_DATE_SOMEONE_WROTE_REGEXES +
+      EmbeddedEmailMatcher::SOMEONE_WROTE_ON_DATE_REGEXES +
+      EmbeddedEmailMatcher::DATE_SOMEONE_WROTE_REGEXES +
+      [EmbeddedEmailMatcher::DATE_SOMEONE_EMAIL_REGEX]
+    ).each do |r|
+      text.gsub!(r) do |m|
+        m.count("\n") > 4 ? m : m.gsub(/\n+[[:space:]]*/, " ")
       end
-
-      # remove leading/trailing whitespaces
-      text.strip!
     end
 
-    def self.compute_elided(text, lines)
-      elided = []
+    # remove leading/trailing whitespaces
+    text.strip!
+  end
 
-      t = 0
-      l = 0
+  def self.compute_elided(text, lines)
+    elided = []
 
-      while t < text.size
-        while l < lines.size && text[t] == lines[l]
-          t += 1
-          l += 1
-        end
-        elided << text[t]
+    t = 0
+    l = 0
+
+    while t < text.size
+      while l < lines.size && text[t] == lines[l]
         t += 1
+        l += 1
       end
-
-      elided.join("\n").strip
+      elided << text[t]
+      t += 1
     end
+
+    elided.join("\n").strip
+  end
 
 end
