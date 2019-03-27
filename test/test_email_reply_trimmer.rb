@@ -30,7 +30,7 @@ class TestEmailReplyTrimmer < Minitest::Test
   EMBEDDED_EMAILS = %w{
     email_headers_1 email_headers_2 email_headers_3 email_headers_4
     embedded_email_10 embedded_email_german_3 embedded_email_spanish_2
-    forwarded_message
+    forwarded_message forwarded_gmail forwarded_apple
   }
 
   EMBEDDED_EMAILS.each do |name|
