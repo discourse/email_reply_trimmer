@@ -144,6 +144,12 @@ class EmailReplyTrimmer
 
     if index = pattern =~ /(?:h[eqd]*?){3,}[tq]/
       embedded = lines[index..-1].join("\n").strip
+    elsif index = pattern =~ /b(?:[eqd]*){3,}[tq]/
+      # Exception for email clients (macOS / iOS) which embed fwd emails in quotes.
+      embedded = lines[index + 1..-1].map { |l| l.gsub(/^>\s*/, '') }.join("\n").strip
+    end
+
+    if index
       before = lines[0...(pattern[0...index] =~ /e*(b[eqd]*|b*[ed]*)$/)].join("\n").strip
       return [embedded, before]
     end
