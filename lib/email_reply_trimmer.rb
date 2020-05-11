@@ -54,7 +54,7 @@ class EmailReplyTrimmer
     end
 
     # when the reply is at the end of the email
-    if pattern =~ /^(b[^t]+)*b[bqeh]+t[et]*$/
+    if pattern =~ /^b[^t]+t[et]*$/
       index = pattern =~ /t[et]*$/
       pattern = ""
       lines = lines[index..-1]
