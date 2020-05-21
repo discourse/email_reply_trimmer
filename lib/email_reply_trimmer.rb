@@ -54,7 +54,7 @@ class EmailReplyTrimmer
     end
 
     # when the reply is at the end of the email
-    if pattern =~ /^b[^t]+t[et]*$/
+    if is_reply_at_end?(pattern)
       index = pattern =~ /t[et]*$/
       pattern = ""
       lines = lines[index..-1]
@@ -212,4 +212,7 @@ class EmailReplyTrimmer
     elided.join("\n").strip
   end
 
+  def self.is_reply_at_end?(pattern)
+    pattern =~ /^b[^t]+t[et]*$/
+  end
 end
