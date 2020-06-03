@@ -78,8 +78,8 @@ class EmailReplyTrimmer
 
     # if there is some text before a huge quote ending the email,
     # then remove the quote
-    if pattern =~ /te*[qbe]+$/
-      index = pattern =~ /te*[qbe]+$/
+    if pattern =~ /t?e*[qbe]+$/
+      index = pattern =~ /t?e*[qbe]+$/
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
