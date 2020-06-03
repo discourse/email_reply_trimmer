@@ -19,6 +19,10 @@ class TestEmailReplyTrimmer < Minitest::Test
     assert_match(/\r\n/, File.read("test/emails/normalize_line_endings.txt"))
   end
 
+  def test_is_reply_at_end?
+    Timeout::timeout(1) { assert_nil(EmailReplyTrimmer.send(:is_reply_at_end?, "bq" * 100)) }
+  end
+
   EMAILS.each do |filename|
     name = File.basename(filename, ".txt")
     define_method("test_#{name}") do

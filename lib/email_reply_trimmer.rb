@@ -54,7 +54,7 @@ class EmailReplyTrimmer
     end
 
     # when the reply is at the end of the email
-    if pattern =~ /^(b[^t]+)*b[bqeh]+t[et]*$/
+    if is_reply_at_end?(pattern)
       index = pattern =~ /t[et]*$/
       pattern = ""
       lines = lines[index..-1]
@@ -78,8 +78,8 @@ class EmailReplyTrimmer
 
     # if there is some text before a huge quote ending the email,
     # then remove the quote
-    if pattern =~ /te*[qbe]+$/
-      index = pattern =~ /te*[qbe]+$/
+    if pattern =~ /t?e*[qbe]+$/
+      index = pattern =~ /t?e*[qbe]+$/
       pattern = pattern[0..index]
       lines = lines[0..index]
     end
@@ -212,4 +212,7 @@ class EmailReplyTrimmer
     elided.join("\n").strip
   end
 
+  def self.is_reply_at_end?(pattern)
+    pattern =~ /^b[^t]+t[et]*$/
+  end
 end
