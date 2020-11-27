@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class EmbeddedEmailMatcher
 
   # On Wed, Sep 25, 2013, at 03:57 PM, jorge_castro wrote:
