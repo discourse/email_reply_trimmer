@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 def name
   @name ||= Dir["*.gemspec"].first.split(".").first
 end

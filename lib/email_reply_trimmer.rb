@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative "email_reply_trimmer/empty_line_matcher"
 require_relative "email_reply_trimmer/delimiter_matcher"
 require_relative "email_reply_trimmer/signature_matcher"
@@ -23,7 +24,7 @@ class EmailReplyTrimmer
     return EMBEDDED     if EmbeddedEmailMatcher.match? line
     return EMAIL_HEADER if EmailHeaderMatcher.match? line
     return QUOTE        if QuoteMatcher.match? line
-    return TEXT
+    TEXT
   end
 
   def self.trim(text, split = false)
@@ -151,7 +152,7 @@ class EmailReplyTrimmer
 
     if index
       before = lines[0...(pattern[0...index] =~ /e*(b[eqd]*|b*[ed]*)$/)].join("\n").strip
-      return [embedded, before]
+      [embedded, before]
     end
   end
 

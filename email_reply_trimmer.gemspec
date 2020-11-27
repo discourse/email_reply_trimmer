@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative "lib/email_reply_trimmer"
 
 Gem::Specification.new do |s|
@@ -20,5 +21,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rake', '~> 12'
   s.add_development_dependency 'minitest', '~> 5'
-  s.add_development_dependency 'rubocop', '~> 0.52.1'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop-discourse'
 end
