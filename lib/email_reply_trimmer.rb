@@ -5,10 +5,15 @@ require_relative "email_reply_trimmer/signature_matcher"
 require_relative "email_reply_trimmer/embedded_email_matcher"
 require_relative "email_reply_trimmer/email_header_matcher"
 require_relative "email_reply_trimmer/quote_matcher"
+require_relative "email_reply_trimmer/code_open_matcher"
+require_relative "email_reply_trimmer/code_close_matcher"
 
 class EmailReplyTrimmer
   VERSION = "0.1.13"
 
+  CODE_CLOSE   = "x"
+  CODE_EITHER  = "p"
+  CODE_OPEN    = "c"
   DELIMITER    = "d"
   EMBEDDED     = "b"
   EMPTY        = "e"
@@ -24,6 +29,9 @@ class EmailReplyTrimmer
     return EMBEDDED     if EmbeddedEmailMatcher.match? line
     return EMAIL_HEADER if EmailHeaderMatcher.match? line
     return QUOTE        if QuoteMatcher.match? line
+    return CODE_EITHER  if CodeOpenMatcher.match? line and CodeCloseMatcher.match? line
+    return CODE_OPEN    if CodeOpenMatcher.match? line
+    return CODE_CLOSE   if CodeCloseMatcher.match? line
     TEXT
   end
 
@@ -41,6 +49,13 @@ class EmailReplyTrimmer
     pattern = lines.map { |l| identify_line_content(l) }.join
 
     # remove everything after the first delimiter
+    # exclude delimiter lines inside code blocks
+    # simple trick, since these matches operate on lower case letters:
+    #  upper-case any Ds that appear in a codee block. Allows future
+    #  further manipulation of those delimiters. Note that we can have
+    #  lines match code-opening patterns, code-closing patterns, or
+    #  both patterns, so this requires a bit of care
+    pattern = pattern.gsub(/[cp][etd]*[xp]/) {|s| s.upcase}
     if pattern =~ /d/
       index = pattern =~ /d/
       pattern = pattern[0...index]
