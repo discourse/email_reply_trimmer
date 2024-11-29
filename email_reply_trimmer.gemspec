@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = "EmailReplyTrimmer is a small library to trim replies from plain text email."
 
   s.authors = ["Régis Hanol"]
-  s.email = ["regis+rubygems@hanol.fr"]
+  s.email = ["rubygems@hanol.fr"]
 
   s.homepage = "https://github.com/discourse/email_reply_trimmer"
   s.license = "MIT"

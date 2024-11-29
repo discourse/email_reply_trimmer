@@ -8,7 +8,7 @@ require_relative "email_reply_trimmer/quote_matcher"
 require 'securerandom'
 
 class EmailReplyTrimmer
-  VERSION = "0.1.13"
+  VERSION = "0.2.0"
 
   DELIMITER    = "d"
   EMBEDDED     = "b"
