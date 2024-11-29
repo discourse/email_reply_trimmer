@@ -1,11 +1,7 @@
 # frozen_string_literal: true
-def name
-  @name ||= Dir["*.gemspec"].first.split(".").first
-end
 
-def version
-  @version ||= File.read("lib/#{name}.rb")[/^\s*VERSION\s*=\s*['"](?'version'\d+\.\d+\.\d+)['"]/, "version"]
-end
+name = Dir["*.gemspec"].first.split(".").first
+version = File.read("lib/#{name}.rb")[/^\s*VERSION\s*=\s*['"](?'version'\d+\.\d+\.\d+)['"]/, "version"]
 
 task default: :test
 
