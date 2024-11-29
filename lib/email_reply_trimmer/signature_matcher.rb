@@ -14,7 +14,7 @@ class SignatureMatcher
   # (sent from a phone)
   # (Sent from mobile device)
   # 從我的 iPhone 傳送
-  SIGNATURE_REGEXES ||= [
+  SIGNATURE_REGEXES = [
     # Chinese
     /^[[:blank:]]*從我的 iPhone 傳送/i,
     # English

@@ -5,6 +5,7 @@ require_relative "email_reply_trimmer/signature_matcher"
 require_relative "email_reply_trimmer/embedded_email_matcher"
 require_relative "email_reply_trimmer/email_header_matcher"
 require_relative "email_reply_trimmer/quote_matcher"
+require 'securerandom'
 
 class EmailReplyTrimmer
   VERSION = "0.1.13"
@@ -33,11 +34,14 @@ class EmailReplyTrimmer
     # do some cleanup
     preprocess!(text)
 
+    # stash the code blocks - replace them with hashes
+    text, blocks = hoist_code_blocks(text)
+
     # from now on, we'll work on a line-by-line basis
     lines = text.split("\n")
     lines_dup = lines.dup
 
-    # identify content of each lines
+    # create a string of characters, one per line, according to the line content
     pattern = lines.map { |l| identify_line_content(l) }.join
 
     # remove everything after the first delimiter
@@ -124,6 +128,9 @@ class EmailReplyTrimmer
     # results
     trimmed = lines.join("\n").strip
 
+    # re-inject code blocks
+    blocks.each { |token, block| trimmed.gsub!(token, block) }
+
     if split
       [trimmed, compute_elided(lines_dup, lines)]
     else
@@ -157,6 +164,19 @@ class EmailReplyTrimmer
   end
 
   private
+
+  def self.hoist_code_blocks(text)
+    blocks = {}
+    pattern = /^```\w*$\n.*?^```$/m
+
+    text.gsub!(pattern) do |block|
+      token = SecureRandom.hex
+      blocks[token] = block
+      token
+    end
+
+    [text, blocks]
+  end
 
   def self.preprocess!(text)
     # normalize line endings

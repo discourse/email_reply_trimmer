@@ -12,7 +12,7 @@ class EmbeddedEmailMatcher
   # Em seg, 27 de jul de 2015 17:13, Neil Lalonde <info@discourse.org> escreveu:
   # El jueves, 21 de noviembre de 2013, codinghorror escribió:
   # At 6/16/2016 08:32 PM, you wrote:
-  ON_DATE_SOMEONE_WROTE_REGEXES ||= [
+  ON_DATE_SOMEONE_WROTE_REGEXES = [
     # Chinese
     /^[[:blank:]<>-]*在 (?:(?!\b(?>在|写道)\b).)+?写道[[:blank:].:>-]*$/im,
     # Dutch
@@ -73,7 +73,7 @@ class EmbeddedEmailMatcher
   end
 
   # Max Mustermann <try_discourse@discoursemail.com> schrieb am Fr., 28. Apr. 2017 um 11:53 Uhr:
-  SOMEONE_WROTE_ON_DATE_REGEXES ||= [
+  SOMEONE_WROTE_ON_DATE_REGEXES = [
     # English
     /^.+\bwrote\b[[:space:]]+\bon\b.+[^:]+:/,
     # German
