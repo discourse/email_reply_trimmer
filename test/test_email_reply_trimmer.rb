@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require "minitest/autorun"
+require "timeout"
 require "email_reply_trimmer"
 
 class TestEmailReplyTrimmer < Minitest::Test
