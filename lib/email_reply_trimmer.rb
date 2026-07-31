@@ -47,8 +47,13 @@ class EmailReplyTrimmer
     # remove everything after the first delimiter
     if pattern =~ /d/
       index = pattern =~ /d/
-      pattern = pattern[0...index]
-      lines = lines[0...index]
+      underscore_separator_before_embedded_email =
+        lines[index] =~ /\A_+\z/ && pattern[(index + 1)..-1] =~ /b/
+
+      unless underscore_separator_before_embedded_email
+        pattern = pattern[0...index]
+        lines = lines[0...index]
+      end
     end
 
     # remove all mobile signatures
@@ -75,7 +80,7 @@ class EmailReplyTrimmer
 
     # if there is an embedded email marker, followed by a huge quote
     # then take everything up to that marker
-    if pattern =~ /te*b[eqbh]*([te]*)$/ && $1.count("t") < 7
+    if pattern =~ /te*b[eqbh]*([te]*)$/ && $1.count("t") < 7 && pattern !~ /bq[eqbh]*t/
       index = pattern =~ /te*b[eqbh]*[te]*$/
       pattern = pattern[0..index]
       lines = lines[0..index]

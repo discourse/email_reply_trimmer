@@ -87,7 +87,7 @@ class EmbeddedEmailMatcher
   # 2013/10/2 camilohollanda <info@discourse.org>
   # вт, 5 янв. 2016 г. в 23:39, Erlend Sogge Heggen <info@discourse.org>:
   # ср, 1 апр. 2015, 18:29, Denis Didkovsky <info@discourse.org>:
-  DATE_SOMEONE_EMAIL_REGEX = /\d{4}.{1,80}\s?<[^@<>]+@[^@<>.]+\.[^@<>]+>:?$/
+  DATE_SOMEONE_EMAIL_REGEX = /(?!.*<img\b)\d{4}.{1,80}\s?<[^@<>]+@[^@<>.]+\.[^@<>]+>:?$/i
 
   # codinghorror via Discourse Meta wrote:
   # codinghorror via Discourse Meta <info@discourse.org> schrieb:
