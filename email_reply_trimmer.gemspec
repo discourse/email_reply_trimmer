@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.files = Dir["**/*"].reject { |path| File.directory?(path) || path =~ /.*\.gem$/ }
   s.test_files = s.files.select { |path| path =~ /^test\/.+_test\.rb$/ }
 
-  s.add_development_dependency 'rake', '~> 12'
+  s.add_development_dependency 'rake', '~> 13'
   s.add_development_dependency 'minitest', '~> 5'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-discourse'
