@@ -1,0 +1,2 @@
+--
+Signature line that should be trimmed.
