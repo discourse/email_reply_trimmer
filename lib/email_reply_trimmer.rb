@@ -80,7 +80,7 @@ class EmailReplyTrimmer
 
     # if there is an embedded email marker, followed by a huge quote
     # then take everything up to that marker
-    if pattern =~ /te*b[eqbh]*([te]*)$/ && $1.count("t") < 7 && pattern !~ /bq[eqbh]*t/
+    if pattern =~ /te*b[eqbh]*([te]*)$/ && $1.count("t") < 7 && pattern !~ /b(?:q[eqbh]*t|e+q+(?:t|e+t+e+t))/
       index = pattern =~ /te*b[eqbh]*[te]*$/
       pattern = pattern[0..index]
       lines = lines[0..index]
