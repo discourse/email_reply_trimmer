@@ -1,0 +1,9 @@
+Możesz na to zerknąć?
+
+--- Treść przekazanej wiadomości ---
+Temat:	Spotkanie we wtorek
+Data:	Fri, 20 Nov 2026 10:12:00 +0100
+Nadawca:	Anna Kowalska <anna.kowalska@example.com>
+Adresat:	Piotr Nowak <piotr.nowak@example.com>
+
+Cześć Piotr, czy wtorek o 14:00 ci pasuje?

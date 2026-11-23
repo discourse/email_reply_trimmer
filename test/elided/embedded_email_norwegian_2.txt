@@ -1,0 +1,7 @@
+-------- Videresendt melding --------
+Emne:	Avtale på tirsdag
+Dato:	Fri, 20 Nov 2026 10:12:00 +0100
+Fra:	Ingrid Hansen <ingrid.hansen@example.com>
+Til:	Lars Johansen <lars.johansen@example.com>
+
+Hei Lars, passer det på tirsdag klokka 14?

@@ -10,6 +10,12 @@ class TestEmailReplyTrimmer < Minitest::Test
     end
   end
 
+  def test_matches_localized_forwarded_email_separators
+    example("localized_forwarded_email_separators.txt").each_line do |line|
+      assert(EmbeddedEmailMatcher.match?(line), "Should match: #{line}")
+    end
+  end
+
   def example(filename)
     File.read("test/matchers/#{filename}").strip
   end

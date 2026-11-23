@@ -123,13 +123,29 @@ class EmbeddedEmailMatcher
     /^[[:blank:]>*]*-{2,}[[:blank:]]*(Forwarded|Original|Reply) Message[[:blank:]]*-{2,}/i,
     # French
     /^[[:blank:]>]*Début du message transféré :/i,
-    /^[[:blank:]>*]*-{2,}[[:blank:]]*Message transféré[[:blank:]]*-{2,}/i,
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*Message (original|d'origine|transféré)[[:blank:]]*-{2,}/i,
     # German
-    /^[[:blank:]>*]*-{2,}[[:blank:]]*Ursprüngliche Nachricht[[:blank:]]*-{2,}/i,
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*(Ursprüngliche Nachricht|Original-Nachricht|Weitergeleitete Nachricht)[[:blank:]]*-{2,}/i,
+    # Portuguese
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*Mensagem (original|encaminhada|reencaminhada)[[:blank:]]*-{2,}/i,
     # Spanish
-    /^[[:blank:]>*]*-{2,}[[:blank:]]*Mensaje original[[:blank:]]*-{2,}/i,
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*Mensaje (original|reenviado)[[:blank:]]*-{2,}/i,
     # Chinese
-    /^[[:blank:]>*]*-{2,}[[:blank:]]*原始邮件[[:blank:]]*-{2,}/i,
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*(原始邮件|原始消息|转发的消息|原始郵件|轉寄郵件)[[:blank:]]*-{2,}/i,
+    # Dutch
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*(Oorspronkelijk|Doorgestuurd) bericht[[:blank:]]*-{2,}/i,
+    # Italian
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*Messaggio (originale|inoltrato)[[:blank:]]*-{2,}/i,
+    # Norwegian
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*(Opprinnelig|Opphavleg|Videresendt|Vidaresend) melding[[:blank:]]*-{2,}/i,
+    # Polish
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*Treść (oryginalnej|przekazanej) wiadomości[[:blank:]]*-{2,}/i,
+    # Russian
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*(Исходное|Перенаправленное) сообщение[[:blank:]]*-{2,}/i,
+    # Swedish
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*(Ursprungligt|Vidarebefordrat) meddelande[[:blank:]]*-{2,}/i,
+    # Ukrainian
+    /^[[:blank:]>*]*-{2,}[[:blank:]]*(Початкове|Переслане) повідомлення[[:blank:]]*-{2,}/i,
   ]
 
   EMBEDDED_REGEXES = [

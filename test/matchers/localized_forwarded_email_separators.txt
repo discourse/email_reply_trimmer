@@ -1,0 +1,30 @@
+-------- Message d'origine --------
+-------- Message original --------
+-------- Message transféré --------
+-------- Original-Nachricht --------
+-------- Weitergeleitete Nachricht --------
+-------- Mensagem original --------
+-------- Mensagem encaminhada --------
+-------- Mensagem reencaminhada --------
+-------- Mensaje original --------
+-------- Mensaje reenviado --------
+-------- 原始消息 --------
+-------- 转发的消息 --------
+------- 原始郵件 -------
+-------- 轉寄郵件 --------
+-------- Oorspronkelijk bericht --------
+-------- Doorgestuurd bericht --------
+-------- Messaggio originale --------
+-------- Messaggio Inoltrato --------
+-------- Opprinnelig melding --------
+-------- Videresendt melding --------
+-------- Opphavleg melding --------
+-------- Vidaresend melding --------
+--- Treść oryginalnej wiadomości ---
+--- Treść przekazanej wiadomości ---
+-------- Исходное сообщение --------
+-------- Перенаправленное сообщение --------
+-------- Ursprungligt meddelande --------
+-------- Vidarebefordrat meddelande --------
+-------- Початкове повідомлення --------
+-------- Переслане повідомлення --------
