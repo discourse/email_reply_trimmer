@@ -1,0 +1,7 @@
+-------- Mensaje reenviado --------
+Asunto:	Cita del martes
+Fecha:	Fri, 20 Nov 2026 10:12:00 +0100
+De:	Lucía García <lucia.garcia@example.com>
+Para:	Carlos Ruiz <carlos.ruiz@example.com>
+
+Hola Carlos, ¿te viene bien el martes a las 14h?

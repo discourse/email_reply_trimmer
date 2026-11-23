@@ -1,0 +1,7 @@
+-------- Weitergeleitete Nachricht --------
+Betreff:	Termin am Dienstag
+Datum:	Fri, 20 Nov 2026 10:12:00 +0100
+Von:	Anna Schmidt <anna.schmidt@example.com>
+An:	Jonas Weber <jonas.weber@example.com>
+
+Hallo Jonas, passt dir Dienstag um 14 Uhr?

@@ -1,0 +1,7 @@
+-------- Message d'origine --------
+De : Claire Martin <claire.martin@example.com>
+Date : 20/11/2026 10:12 (GMT+01:00)
+À : Julien Bernard <julien.bernard@example.com>
+Objet : Rendez-vous de mardi
+
+Bonjour Julien, pouvez-vous confirmer le rendez-vous de mardi à 14h ?

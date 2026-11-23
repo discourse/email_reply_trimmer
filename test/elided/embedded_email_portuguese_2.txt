@@ -1,0 +1,7 @@
+-------- Mensagem original --------
+Assunto:	Consulta de terça-feira
+Data:	Fri, 20 Nov 2026 10:12:00 -0300
+De:	Ana Souza <ana.souza@example.com>
+Para:	Pedro Lima <pedro.lima@example.com>
+
+Olá Pedro, pode confirmar a consulta de terça-feira às 14h?

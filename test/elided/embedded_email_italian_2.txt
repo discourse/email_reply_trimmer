@@ -1,0 +1,7 @@
+-------- Messaggio Inoltrato --------
+Oggetto:	Appuntamento di martedì
+Data:	Fri, 20 Nov 2026 10:12:00 +0100
+Mittente:	Giulia Rossi <giulia.rossi@example.com>
+A:	Marco Bianchi <marco.bianchi@example.com>
+
+Ciao Marco, martedì alle 14 va bene?
